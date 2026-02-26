@@ -3,116 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convite Especial | O País das Maravilhas</title>
+    <title>15 Anos | O País das Maravilhas</title>
     
     <link rel="stylesheet" href="style.css">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <div id="preloader" class="preloader-overlay">
-        <div class="spinner-magico"></div>
-        <p>Seguindo o coelho branco...</p>
-    </div>
 
     <audio id="bg-music" loop preload="auto">
         <source src="https://assets.mixkit.co/music/preview/mixkit-magical-dream-scape-129.mp3" type="audio/mpeg">
     </audio>
 
-    <button id="audio-toggle" class="audio-btn" aria-label="Controlar música" style="display: none;">
-        <svg id="icon-sound-on" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-        <svg id="icon-sound-off" viewBox="0 0 24 24" fill="currentColor" style="display: none;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-    </button>
-
-    <svg style="width:0;height:0;position:absolute;">
-        <linearGradient id="disney-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#FFF7D6" />
-            <stop offset="50%" stop-color="#FFD700" />
-            <stop offset="100%" stop-color="#D4AF37" />
-        </linearGradient>
-    </svg>
-
-    <section id="act-1" class="scene">
-        <div class="poetic-line" id="line-1">"Estamos todos loucos aqui..."</div>
-        <div class="poetic-line" id="line-2">"Siga o coelho branco."</div>
-        <div class="poetic-line" id="line-3">"A mágica está do outro lado da porta."</div>
-    </section>
-
-    <section id="act-2" class="scene">
-        <div class="door-wrapper" onclick="App.transitionToWonderland()" role="button" tabindex="0">
-            <div class="magical-dust"></div>
-            <svg class="keyhole-svg" viewBox="0 0 100 150">
-                <path d="M50,10 C30,10 15,25 15,45 C15,60 25,72 38,78 L30,130 C28,138 35,145 42,145 L58,145 C65,145 72,138 70,130 L62,78 C75,72 85,60 85,45 C85,25 70,10 50,10 Z M50,55 C44.5,55 40,50.5 40,45 C40,39.5 44.5,35 50,35 C55.5,35 60,39.5 60,45 C60,50.5 55.5,55 50,55 Z" />
+    <section id="act-1" class="scene is-active rabbit-hole">
+        <div class="rabbit-container" onclick="App.fallDownTheHole()" role="button" tabindex="0">
+            <svg class="pocket-watch" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="55" r="40" fill="none" stroke="#FFD700" stroke-width="4"/>
+                <circle cx="50" cy="55" r="35" fill="#111" stroke="#FFD700" stroke-width="1"/>
+                <line x1="50" y1="55" x2="50" y2="30" stroke="#FFF" stroke-width="3" stroke-linecap="round" class="hand-minute"/>
+                <line x1="50" y1="55" x2="65" y2="55" stroke="#FFD700" stroke-width="4" stroke-linecap="round" class="hand-hour"/>
+                <circle cx="50" cy="55" r="4" fill="#FFD700"/>
+                <path d="M45,15 C45,5 55,5 55,15" fill="none" stroke="#FFD700" stroke-width="3"/>
+                <rect x="47" y="15" width="6" height="5" fill="#FFD700"/>
             </svg>
-            <div class="enter-hint">Toque para Entrar</div>
+            <h1 class="rabbit-text">"Estou atrasado! Estou atrasado!"</h1>
+            <p class="rabbit-hint">Toque no relógio para segui-lo...</p>
         </div>
     </section>
 
-    <div id="global-bg" style="display: none;">
-        <video class="video-bg" id="bg-video" loop muted playsinline>
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-stars-in-space-1610-large.mp4" type="video/mp4">
-        </video>
-        <div class="vignette-magical"></div>
-        
-        <svg class="cheshire-smile" viewBox="0 0 100 50">
-            <path d="M 10 20 Q 50 60 90 20 Q 80 40 50 45 Q 20 40 10 20 Z" fill="rgba(255, 215, 0, 0.15)"/>
-            <path d="M 20 25 Q 50 50 80 25" stroke="rgba(255, 215, 0, 0.2)" stroke-width="2" fill="none"/>
+    <section id="act-2" class="scene cat-realm">
+        <svg class="cheshire-smile" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 20 40 Q 100 100 180 40 Q 150 70 100 75 Q 50 70 20 40 Z" fill="#b026ff" opacity="0.3"/>
+            <path d="M 30 45 Q 100 90 170 45" stroke="#ff26a5" stroke-width="3" fill="none" filter="drop-shadow(0 0 10px #ff26a5)"/>
+            <path d="M 60 20 Q 70 10 80 20 Q 70 25 60 20 Z" fill="#ff26a5" filter="drop-shadow(0 0 8px #ff26a5)"/>
+            <path d="M 120 20 Q 130 10 140 20 Q 130 25 120 20 Z" fill="#ff26a5" filter="drop-shadow(0 0 8px #ff26a5)"/>
         </svg>
-        
-        <div class="floating-items" id="floating-items-container" aria-hidden="true"></div>
-    </div>
 
-    <section id="act-3" class="scene">
-        <div class="glass-panel main-invitation tilt-effect">
-            <h1 class="title-fairytale">[Nome da Anfitriã]</h1>
-            <p class="subtitle-enchanting">Convida você para o seu Chá da Loucura.<br>Não se atrase!</p>
+        <div class="content-box neon-box">
+            <h2 class="title-mad">[Nome da Anfitriã]</h2>
+            <p class="subtitle-mad">"Nós todos somos loucos aqui."</p>
+            <p class="body-mad">Você foi convocado(a) para a celebração mais surreal do ano. Meus 15 anos.</p>
             
-            <div class="details-section">
-                <div class="detail-item">
-                    <span class="detail-label">Tempo</span>
-                    <span class="detail-value">15 de Nov, 20h</span>
+            <div class="details-grid">
+                <div class="detail-block">
+                    <span>O Dia</span>
+                    <strong>15 de Novembro</strong>
                 </div>
-                <div class="detail-item full-width">
-                    <span class="detail-label">Toca do Coelho</span>
-                    <span class="detail-value">Castelo de Eventos, Cidade - Estado</span>
+                <div class="detail-block">
+                    <span>A Hora</span>
+                    <strong>20:00</strong>
+                </div>
+                <div class="detail-block full">
+                    <span>Onde a magia acontece</span>
+                    <strong>Salão de Eventos, Cidade - Estado</strong>
                 </div>
             </div>
 
-            <form id="rsvp-form" novalidate>
-                <div class="form-group">
-                    <label for="familyName">Nome do Convidado / Família</label>
-                    <input type="text" class="glass-input" id="familyName" required placeholder="Ex: Família Real" autocomplete="off">
-                    <span class="error-msg">Por favor, insira um nome.</span>
-                </div>
-                <div class="form-group">
-                    <label for="guests">Número de Acompanhantes</label>
-                    <input type="number" class="glass-input" id="guests" min="0" max="5" required placeholder="0">
-                    <span class="error-msg">Insira um número (0 a 5).</span>
-                </div>
-                <button type="submit" class="btn-magic" id="btn-confirm">Garantir meu lugar à mesa</button>
-            </form>
+            <button class="btn-mad btn-cat" onclick="App.goToHatter()">Confirmar com o Chapeleiro</button>
         </div>
     </section>
 
-    <section id="act-4" class="scene">
-        <div class="glass-panel gifts-panel tilt-effect">
-            <svg viewBox="0 0 100 100" class="hat-icon" style="width: 60px; height: 60px; fill: var(--gold-base); margin: 0 auto 15px auto; display: block;">
-                <path d="M20,70 L30,30 L70,30 L80,70 L90,70 L90,80 L10,80 L10,70 Z M35,40 L35,60 L65,60 L65,40 Z" />
+    <section id="act-3" class="scene hatter-tea">
+        <div class="floating-hats" id="hat-container"></div> <div class="content-box emerald-box">
+            <svg class="hat-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15,75 L85,75 L85,85 L15,85 Z" fill="#FFD700"/>
+                <path d="M25,35 L75,35 L80,75 L20,75 Z" fill="#0a2e1f" stroke="#FFD700" stroke-width="2"/>
+                <path d="M25,35 C25,20 75,20 75,35" fill="#0a2e1f" stroke="#FFD700" stroke-width="2"/>
+                <rect x="22" y="60" width="56" height="8" fill="#FF26A5"/> <text x="30" y="55" font-family="sans-serif" font-size="12" fill="#FFD700" transform="rotate(-15 30 55)">10/6</text>
             </svg>
-            <h2 class="title-fairytale" style="font-size: 2.5rem;">O Chá do Chapeleiro</h2>
+
+            <h2 class="title-mad" style="color: #FFD700; font-size: 2.2rem;">A Mesa de Chá</h2>
             
-            <div id="gifts-section">
-                <p class="subtitle-enchanting" style="margin-bottom: 20px; font-size: 1.1rem;">Sua presença foi confirmada com sucesso! Você já faz parte desta loucura.</p>
-                <p class="subtitle-enchanting" style="margin-bottom: 25px; font-size: 0.95rem; color: var(--text-muted);">Como nossa convidada de honra não quer que você se preocupe em carregar presentes, deixamos nossa caixinha mágica abaixo:</p>
+            <div id="rsvp-step">
+                <p class="body-mad" style="color: #e0e0e0;">Não se sente sem ser convidado! Garanta seu lugar:</p>
+                <form id="rsvp-form" novalidate>
+                    <div class="form-group">
+                        <label>Quem ousa entrar?</label>
+                        <input type="text" class="mad-input" id="familyName" required placeholder="Seu Nome ou Família">
+                    </div>
+                    <div class="form-group">
+                        <label>Quantos te acompanham na loucura?</label>
+                        <input type="number" class="mad-input" id="guests" min="0" max="5" required placeholder="0 a 5">
+                    </div>
+                    <button type="submit" class="btn-mad btn-hatter" id="btn-confirm">Reservar Xícara</button>
+                </form>
+            </div>
+
+            <div id="vip-step" style="display: none;">
+                <p class="body-mad" style="color: #FFD700; font-size: 1.2rem; font-weight: bold;">Lugar Reservado!</p>
+                <p class="body-mad" style="color: #e0e0e0; margin-bottom: 20px;">Como nossa convidada detesta carregar presentes físicos, deixamos a caixinha mágica abaixo:</p>
                 
                 <div class="form-group" style="text-align: center;">
-                    <label>Chave PIX da Anfitriã</label>
-                    <input type="text" class="glass-input pix-key" value="magia.alice@banco.com" readonly style="text-align: center; color: var(--gold-light); font-weight: bold; letter-spacing: 1px;">
+                    <label style="color: #FF26A5;">Chave PIX da Anfitriã</label>
+                    <input type="text" class="mad-input pix-key" value="aniversario.alice@banco.com" readonly style="text-align: center; font-weight: bold; letter-spacing: 2px;">
                 </div>
-                <button class="btn-magic secondary-btn" onclick="App.copyPix()">Copiar Chave Mágica</button>
+                <button class="btn-mad btn-hatter-outline" onclick="App.copyPix()">Copiar Chave</button>
             </div>
         </div>
     </section>
