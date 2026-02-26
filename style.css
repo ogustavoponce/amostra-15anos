@@ -1,0 +1,132 @@
+/* ==========================================================================
+   1. VARIÁVEIS & DESIGN SYSTEM (Estética Disney/Premium)
+   ========================================================================== */
+:root {
+    --bg-void: #060913; 
+    --gold-base: #FFD700;
+    --gold-light: #FFF7D6;
+    --gold-dark: #D4AF37;
+    --error-red: #ff4d4d;
+    --success-green: #00e676;
+    --text-primary: #ffffff;
+    --text-muted: #c2c9d6;
+    
+    --glass-bg: rgba(25, 30, 50, 0.45);
+    --glass-border: linear-gradient(135deg, rgba(255, 215, 0, 0.5) 0%, rgba(255, 255, 255, 0.05) 100%);
+    --glass-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 215, 0, 0.05);
+    
+    --font-title: 'Great Vibes', cursive; 
+    --font-serif: 'Cinzel Decorative', serif;
+    --font-body: 'Montserrat', sans-serif;
+    
+    --ease-magic: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body, html {
+    width: 100%; height: 100%;
+    background-color: var(--bg-void); color: var(--text-primary);
+    font-family: var(--font-body); overflow: hidden;
+    perspective: 1000px; /* Base para o Parallax 3D */
+}
+
+/* ==========================================================================
+   2. PRELOADER & ÁUDIO CONTROLS
+   ========================================================================== */
+.preloader-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--bg-void); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1s ease-out; }
+.spinner-magico { width: 50px; height: 50px; border: 3px solid rgba(255, 215, 0, 0.2); border-top-color: var(--gold-base); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+.preloader-overlay p { font-family: var(--font-serif); color: var(--gold-light); letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.audio-btn { position: fixed; bottom: 30px; right: 30px; z-index: 100; width: 50px; height: 50px; border-radius: 50%; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid rgba(255, 215, 0, 0.3); color: var(--gold-base); cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 15px rgba(0,0,0,0.5); transition: all 0.3s; }
+.audio-btn:hover { transform: scale(1.1); border-color: var(--gold-base); }
+.audio-btn svg { width: 24px; height: 24px; }
+
+/* ==========================================================================
+   3. MACHINE STATE & ATOS (Cenas)
+   ========================================================================== */
+.scene { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 1.5s var(--ease-magic), transform 1.5s var(--ease-magic); z-index: 10; }
+.scene.is-active { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+.scene.is-leaving { opacity: 0; transform: translateY(-50px) scale(0.95); pointer-events: none; } /* Efeito de saída limpa */
+
+/* ==========================================================================
+   ATO 1 & ATO 2
+   ========================================================================== */
+#act-1 { background-color: var(--bg-void); z-index: 30; }
+.poetic-line { position: absolute; font-family: var(--font-serif); font-size: clamp(1.5rem, 4vw, 2rem); text-align: center; opacity: 0; color: var(--gold-light); letter-spacing: 2px; padding: 0 20px;}
+@keyframes magicalFade { 0% { opacity: 0; filter: blur(10px); transform: scale(0.9); } 30%, 70% { opacity: 1; filter: blur(0px); transform: scale(1); text-shadow: 0 0 20px rgba(255, 215, 0, 0.5); } 100% { opacity: 0; filter: blur(10px); transform: scale(1.1); } }
+
+#act-2 { background: radial-gradient(circle at center, #12182b 0%, var(--bg-void) 100%); z-index: 20; }
+.door-wrapper { position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; transition: transform 3s cubic-bezier(0.7, 0, 0.3, 1), opacity 2s; outline: none;}
+.door-wrapper:focus-visible .keyhole-svg { filter: drop-shadow(0 0 35px var(--gold-light)); }
+.door-wrapper.zoom-through { transform: scale(30); opacity: 0; filter: brightness(2) blur(2px); }
+.keyhole-svg { width: 100px; height: 160px; fill: url(#disney-gold); filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.6)); animation: gentleFloat 4s ease-in-out infinite; }
+.magical-dust { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 1px; height: 1px; box-shadow: 0 0 100px 60px rgba(255, 215, 0, 0.2); border-radius: 50%; animation: pulseDust 2s infinite alternate; z-index: -1; }
+.enter-hint { margin-top: 40px; font-family: var(--font-serif); font-size: 1rem; letter-spacing: 5px; color: var(--gold-base); text-transform: uppercase; animation: pulseText 2s infinite alternate; }
+
+/* ==========================================================================
+   FUNDO GLOBAL & GATO DE CHESHIRE
+   ========================================================================== */
+.video-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -2; opacity: 0.5; }
+.vignette-magical { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle at center, transparent 20%, var(--bg-void) 100%); z-index: -1; pointer-events: none; }
+.cheshire-smile { position: fixed; top: 15%; left: 50%; transform: translateX(-50%); width: clamp(200px, 40vw, 350px); opacity: 0; z-index: -1; animation: cheshireFade 12s infinite ease-in-out; pointer-events: none; }
+@keyframes cheshireFade { 0%, 100% { opacity: 0; filter: blur(10px); } 50% { opacity: 0.6; filter: blur(2px); } }
+
+/* ==========================================================================
+   ATO 3 & ATO 4 (Painéis Glassmorphism)
+   ========================================================================== */
+#act-3, #act-4 { overflow-y: auto; overflow-x: hidden; padding: 40px 20px; align-items: center; justify-content: center; }
+
+.tilt-effect { transform-style: preserve-3d; transition: transform 0.1s ease-out; will-change: transform; }
+
+.glass-panel {
+    background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid transparent; border-image: var(--glass-border) 1; border-radius: 12px;
+    box-shadow: var(--glass-shadow); width: 100%; max-width: 500px; padding: 45px 35px; margin: auto;
+    transform: translateZ(30px); /* Traz o vidro para frente no 3D */
+}
+
+.title-fairytale { font-family: var(--font-title); font-size: clamp(2.8rem, 8vw, 4rem); text-align: center; background: linear-gradient(to right, var(--gold-light), var(--gold-base), var(--gold-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 5px; font-weight: normal; line-height: 1.2; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); transform: translateZ(40px); }
+.subtitle-enchanting { font-size: 1.1rem; text-align: center; color: var(--text-primary); margin-bottom: 25px; line-height: 1.6; font-weight: 300; transform: translateZ(30px); }
+
+/* Detalhes do Evento */
+.details-section { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; border-top: 1px solid rgba(255, 215, 0, 0.2); border-bottom: 1px solid rgba(255, 215, 0, 0.2); padding: 20px 0; text-align: center; transform: translateZ(20px); }
+.detail-label { display: block; font-family: var(--font-serif); color: var(--gold-base); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; }
+.detail-value { display: block; color: var(--text-primary); font-size: 1.1rem; font-weight: 600; }
+
+/* Formulário e Validação de UX */
+.form-group { margin-bottom: 20px; position: relative; transform: translateZ(30px); }
+.form-group label { display: block; font-family: var(--font-serif); color: var(--gold-base); margin-bottom: 8px; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
+
+.glass-input { width: 100%; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 215, 0, 0.3); color: var(--text-primary); padding: 14px; font-family: var(--font-body); font-size: 1rem; border-radius: 8px; outline: none; transition: all 0.3s; }
+.glass-input:focus { border-color: var(--gold-base); background: rgba(0, 0, 0, 0.5); box-shadow: 0 0 20px rgba(255, 215, 0, 0.15); }
+
+.glass-input.is-invalid { border-color: var(--error-red); box-shadow: 0 0 15px rgba(255, 77, 77, 0.2); }
+.glass-input.is-valid { border-color: var(--success-green); }
+.error-msg { color: var(--error-red); font-size: 0.8rem; margin-top: 5px; display: none; position: absolute; }
+.glass-input.is-invalid + .error-msg { display: block; animation: shake 0.4s; }
+
+/* Botões */
+.btn-magic { width: 100%; background: linear-gradient(135deg, var(--gold-base) 0%, var(--gold-dark) 100%); color: #000; font-family: var(--font-serif); font-weight: 700; font-size: 0.95rem; padding: 16px; border: none; border-radius: 8px; cursor: pointer; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.3s var(--ease-magic); box-shadow: 0 5px 15px rgba(0,0,0,0.3); transform: translateZ(40px); position: relative; overflow: hidden; }
+.btn-magic:hover { transform: translateY(-3px) translateZ(40px); box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4); }
+.btn-magic:disabled { filter: grayscale(1); cursor: not-allowed; opacity: 0.8; }
+.btn-magic.secondary-btn { background: transparent; border: 2px solid var(--gold-base); color: var(--gold-base); margin-top: 10px; box-shadow: none; }
+.btn-magic.secondary-btn:hover { background: rgba(255, 215, 0, 0.1); }
+
+/* ==========================================================================
+   ANIMAÇÕES GERAIS
+   ========================================================================== */
+.floating-items { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.floating-item { position: absolute; opacity: 0; animation: floatUp var(--duration) ease-in-out infinite; animation-delay: var(--delay); filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));}
+
+@keyframes floatUp { 0% { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; } 10%, 90% { opacity: var(--opacity); } 100% { transform: translateY(-10vh) translateX(var(--drift)) rotate(var(--rotate-end)); opacity: 0; } }
+@keyframes gentleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes pulseDust { 0% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); } 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); } }
+@keyframes pulseText { 0% { opacity: 0.6; } 100% { opacity: 1; text-shadow: 0 0 15px var(--gold-base); } }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-5px); } }
+
+/* Responsividade Básica */
+@media (max-width: 480px) {
+    .glass-panel { padding: 35px 20px; }
+}
