@@ -9,61 +9,48 @@ const App = (function() {
         rsvpStep: document.getElementById('rsvp-step'),
         vipStep: document.getElementById('vip-step'),
         btnConfirm: document.getElementById('btn-confirm'),
-        inputs: document.querySelectorAll('.mad-input'),
-        hatContainer: document.getElementById('hat-container')
+        inputs: document.querySelectorAll('.chic-input-group input')
     };
 
     const CONFIG = {
-        whatsappNumber: "5511999999999", // NÚMERO DO WHATSAPP DA ANFITRIÃ
+        whatsappNumber: "5511999999999", // INSERIR O NÚMERO
     };
 
     let isAudioPlaying = false;
 
-    // A Queda na Toca do Coelho (Zoom Invertido Maluco)
-    const fallDownTheHole = () => {
-        // Tenta tocar a música ao primeiro clique
+    // Transição suave de entrada
+    const unlockExperience = () => {
         if (!isAudioPlaying) {
-            DOM.audio.volume = 0.5;
+            DOM.audio.volume = 0.3; // Volume baixo, música elegante
             DOM.audio.play().catch(() => console.log("Áudio bloqueado"));
             isAudioPlaying = true;
         }
 
-        // Aplica a classe que faz a tela girar e dar zoom
-        DOM.act1.classList.add('falling');
-
-        // Após a "queda", acorda no reino do Gato
-        setTimeout(() => {
-            DOM.act1.classList.remove('is-active', 'falling');
-            DOM.act2.classList.add('is-active');
-        }, 1000); // Sincronizado com o CSS
-    };
-
-    // Passagem para a Mesa do Chapeleiro
-    const goToHatter = () => {
-        DOM.act2.classList.remove('is-active');
-        DOM.act3.classList.add('is-active');
-        document.body.style.overflow = 'auto'; // Libera a rolagem se a tela for pequena
-        generateHats();
-    };
-
-    // Gera os chapéus flutuantes no fundo da Seção 3
-    const generateHats = () => {
-        if(DOM.hatContainer.innerHTML !== "") return; // Evita duplicar
-
-        const svgHat = `<svg viewBox="0 0 100 100"><path d="M15,75 L85,75 L85,85 L15,85 Z" fill="#FFD700"/><path d="M25,35 L75,35 L80,75 L20,75 Z" fill="#0a2e1f"/><path d="M25,35 C25,20 75,20 75,35" fill="#0a2e1f"/></svg>`;
+        DOM.act1.classList.remove('is-active');
+        DOM.act1.classList.add('is-hidden');
         
-        for (let i = 0; i < 12; i++) {
-            let hat = document.createElement('div');
-            hat.classList.add('floating-hat');
-            hat.innerHTML = svgHat;
-            hat.style.left = `${Math.random() * 90}%`;
-            hat.style.setProperty('--dur', `${Math.random() * 10 + 10}s`);
-            hat.style.animationDelay = `${Math.random() * 5}s`;
-            DOM.hatContainer.appendChild(hat);
-        }
+        setTimeout(() => {
+            DOM.act2.classList.add('is-active');
+        }, 800);
     };
 
-    // Validação surrealista
+    // Navegação entre Convite e RSVP
+    const showRSVP = () => {
+        DOM.act2.classList.remove('is-active');
+        setTimeout(() => {
+            DOM.act3.classList.add('is-active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 800);
+    };
+
+    const backToInvite = () => {
+        DOM.act3.classList.remove('is-active');
+        setTimeout(() => {
+            DOM.act2.classList.add('is-active');
+        }, 800);
+    };
+
+    // Validação Elegante
     const validateForm = () => {
         let valid = true;
         DOM.inputs.forEach(input => {
@@ -78,41 +65,54 @@ const App = (function() {
         return valid;
     };
 
-    // Confirmar Presença e liberar a Chave
+    // Submissão do R.S.V.P.
     const handleRSVP = (e) => {
         e.preventDefault();
         
         if (!validateForm()) return;
 
         const name = document.getElementById('familyName').value;
-        const guests = parseInt(document.getElementById('guests').value) + 1; // +1 do titular
+        const guests = parseInt(document.getElementById('guests').value) + 1;
         
-        DOM.btnConfirm.innerText = "Servindo o Chá...";
+        DOM.btnConfirm.innerText = "Processando...";
         DOM.btnConfirm.disabled = true;
 
         setTimeout(() => {
-            // Troca o visual de RSVP para o Mimo
-            DOM.rsvpStep.style.display = 'none';
-            DOM.vipStep.style.display = 'block';
-
-            // Abre o WhatsApp
-            const msg = `🎩 *Reserva na Mesa do Chapeleiro!*\n\nOlá, vim confirmar nossa presença na loucura dos 15 anos.\n\n*Nome:* ${name}\n*Total de Xícaras:* ${guests}`;
-            window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+            // Fade suave para a área VIP
+            DOM.rsvpStep.style.opacity = '0';
             
-        }, 1500);
+            setTimeout(() => {
+                DOM.rsvpStep.style.display = 'none';
+                DOM.vipStep.style.display = 'block';
+                DOM.vipStep.style.opacity = '0';
+                
+                // Força reflow
+                void DOM.vipStep.offsetWidth;
+                DOM.vipStep.style.transition = 'opacity 1s ease';
+                DOM.vipStep.style.opacity = '1';
+
+                // Dispara o WhatsApp
+                const msg = `🥂 *R.S.V.P. - Confirmação de Presença*\n\nÉ com grande satisfação que confirmamos nossa presença neste evento inesquecível.\n\n*Convidado:* ${name}\n*Total de Pessoas:* ${guests}`;
+                window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+            }, 500);
+            
+        }, 1200);
     };
 
-    // Função de Copiar o PIX
     const copyPix = () => {
         const pix = document.querySelector('.pix-key').value;
         navigator.clipboard.writeText(pix).then(() => {
-            alert("A Rainha Branca aprovou! Chave copiada.");
+            // Modifica o texto do botão temporariamente para feedback sutil
+            const btn = document.querySelector('.btn-chic.outline');
+            const originalText = btn.innerText;
+            btn.innerText = "Copiado com sucesso";
+            setTimeout(() => btn.innerText = originalText, 3000);
         });
     };
 
-    // Eventos
+    // Event Listeners
     DOM.form.addEventListener('submit', handleRSVP);
     DOM.inputs.forEach(inp => inp.addEventListener('input', () => inp.classList.remove('error')));
 
-    return { fallDownTheHole, goToHatter, copyPix };
+    return { unlockExperience, showRSVP, backToInvite, copyPix };
 })();
