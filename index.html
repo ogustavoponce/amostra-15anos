@@ -3,98 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>15 Anos | Uma Noite no País das Maravilhas</title>
+    <title>XV | Através do Espelho</title>
     
     <link rel="stylesheet" href="style.css">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <div class="cinema-bar top-bar"></div>
+    <div class="cinema-bar bottom-bar"></div>
 
     <audio id="bg-music" loop preload="auto">
         <source src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3" type="audio/mpeg">
     </audio>
 
+    <div id="cinematic-bg">
+        <video class="video-bg" id="bg-video" loop muted playsinline>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-in-slow-motion-11884-large.mp4" type="video/mp4">
+        </video>
+        <div class="cinematic-vignette"></div>
+        <div class="film-grain"></div> </div>
+
     <section id="act-1" class="scene is-active">
-        <div class="elegant-entrance" onclick="App.unlockExperience()" role="button" tabindex="0">
-            <p class="whisper-text">Acompanhe-nos através do espelho</p>
-            
-            <svg class="minimal-keyhole" viewBox="0 0 50 80" xmlns="http://www.w3.org/2000/svg">
-                <path d="M25,5 C15,5 8,12 8,22 C8,28 12,34 18,37 L14,75 L36,75 L32,37 C38,34 42,28 42,22 C42,12 35,5 25,5 Z" fill="none" stroke="var(--gold-champagne)" stroke-width="1.5"/>
-                <circle cx="25" cy="22" r="3" fill="var(--gold-champagne)"/>
-            </svg>
-            
-            <p class="action-text">Desvendar</p>
+        <div class="portal-container" onclick="App.startTheFilm()">
+            <div class="glowing-ring"></div>
+            <p class="director-text">Uma Produção Inesquecível</p>
+            <h1 class="portal-action">Atravessar o Espelho</h1>
         </div>
     </section>
 
     <section id="act-2" class="scene">
-        <div class="video-overlay"></div>
-        
-        <div class="couture-panel">
-            <p class="date-header">XV . XI . MMXVI</p> <h1 class="name-title">[Nome da Anfitriã]</h1>
-            <h2 class="theme-subtitle">Uma Noite no País das Maravilhas</h2>
-            
-            <div class="elegant-divider"></div>
-            
-            <p class="invitation-body">
-                Temos a honra de convidar você para celebrar este capítulo inesquecível.<br>
-                Uma noite onde a elegância encontra o extraordinário.
-            </p>
-            
-            <div class="details-minimal">
-                <div>
-                    <span class="detail-label">Recepção</span>
-                    <span class="detail-value">Sábado, 15 de Novembro às 20h</span>
-                </div>
-                <div>
-                    <span class="detail-label">Localização</span>
-                    <span class="detail-value">Château des Événements<br>Cidade, Estado</span>
-                </div>
-                <div>
-                    <span class="detail-label">Dress Code</span>
-                    <span class="detail-value">Traje de Gala / Esporte Fino</span>
-                </div>
-            </div>
-
-            <button class="btn-chic" onclick="App.showRSVP()">R.S.V.P.</button>
+        <div class="title-sequence">
+            <h2 class="film-credit" id="credit-1">O Tempo é Apenas Uma Ilusão.</h2>
+            <h1 class="film-title" id="credit-2">[NOME DA ANFITRIÃ]</h1>
+            <h3 class="film-subtitle" id="credit-3">Apresenta<br>Uma Noite no País das Maravilhas</h3>
         </div>
     </section>
 
     <section id="act-3" class="scene">
-        <div class="couture-panel form-panel">
-            
-            <div id="rsvp-step">
-                <h2 class="theme-subtitle" style="font-size: 1.8rem; margin-bottom: 30px;">R. S. V. P.</h2>
-                <form id="rsvp-form" novalidate>
-                    <div class="chic-input-group">
-                        <input type="text" id="familyName" required placeholder=" ">
-                        <label>Nome ou Família</label>
-                    </div>
-                    <div class="chic-input-group">
-                        <input type="number" id="guests" min="0" max="5" required placeholder=" ">
-                        <label>Número de Acompanhantes</label>
-                    </div>
-                    <button type="submit" class="btn-chic" id="btn-confirm">Confirmar Presença</button>
-                    <button type="button" class="btn-text-only" onclick="App.backToInvite()">Retornar ao Convite</button>
-                </form>
-            </div>
-
-            <div id="vip-step" style="display: none;">
-                <h2 class="theme-subtitle" style="font-size: 1.8rem; margin-bottom: 20px;">A Chave de Ouro</h2>
-                <p class="invitation-body" style="font-size: 1rem; margin-bottom: 30px;">
-                    Sua presença é a verdadeira honra desta noite. <br>
-                    Caso deseje nos agraciar com um presente, disponibilizamos nossa chave digital abaixo.
+        <div class="cinematic-panel">
+            <div class="panel-content">
+                <p class="date-stamp">XV • XI • MMXVI</p>
+                
+                <h2 class="main-invite-title">O Grande Baile</h2>
+                <div class="gold-line"></div>
+                
+                <p class="invite-lore">
+                    Você foi escalado(a) para o papel principal desta noite.<br>
+                    Não se atrase. O relógio já começou a correr.
                 </p>
                 
-                <div class="chic-input-group">
-                    <input type="text" class="pix-key" value="gala.alice@banco.com" readonly style="text-align: center; color: var(--gold-champagne); letter-spacing: 2px;">
+                <div class="cast-details">
+                    <div class="cast-row">
+                        <span class="cast-role">Cena 1 (Recepção)</span>
+                        <span class="cast-actor">20:00, Sábado, 15 de Novembro</span>
+                    </div>
+                    <div class="cast-row">
+                        <span class="cast-role">Locação (Set)</span>
+                        <span class="cast-actor">Château des Événements, Cidade</span>
+                    </div>
+                    <div class="cast-row">
+                        <span class="cast-role">Figurino</span>
+                        <span class="cast-actor">Gala / Black Tie</span>
+                    </div>
                 </div>
-                <button class="btn-chic outline" onclick="App.copyPix()">Copiar Chave</button>
+
+                <div class="rsvp-director-cut">
+                    <form id="rsvp-form" novalidate>
+                        <div class="cine-input-group">
+                            <input type="text" id="familyName" required placeholder=" ">
+                            <label>Nome do Convidado (Protagonista)</label>
+                        </div>
+                        <div class="cine-input-group">
+                            <input type="number" id="guests" min="0" max="5" required placeholder=" ">
+                            <label>Acompanhantes (Elenco de Apoio)</label>
+                        </div>
+                        <button type="submit" class="btn-director" id="btn-confirm">Garantir Lugar na Estreia</button>
+                    </form>
+                </div>
+
+                <div id="vip-step" style="display: none; margin-top: 30px;">
+                    <p class="invite-lore" style="color: var(--gold-cinema); font-size: 1.1rem;">Lista VIP Confirmada.</p>
+                    <p class="invite-lore" style="font-size: 0.9rem; margin-bottom: 20px;">
+                        Como bons cineastas, dispensamos presentes físicos no set de gravação.<br> Nossa bilheteria (Chave PIX) encontra-se abaixo.
+                    </p>
+                    <input type="text" class="cine-input pix-key" value="premiere.alice@banco.com" readonly style="text-align: center; border: 1px solid var(--gold-cinema); padding: 15px; width: 100%; background: rgba(0,0,0,0.5); color: var(--gold-cinema); letter-spacing: 2px; font-family: 'Cinzel', serif;">
+                    <button class="btn-director outline" onclick="App.copyPix()" style="margin-top: 15px;">Copiar Bilheteria</button>
+                </div>
             </div>
-            
         </div>
     </section>
 

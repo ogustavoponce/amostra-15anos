@@ -4,53 +4,82 @@ const App = (function() {
         act1: document.getElementById('act-1'),
         act2: document.getElementById('act-2'),
         act3: document.getElementById('act-3'),
+        bgContainer: document.getElementById('cinematic-bg'),
+        video: document.getElementById('bg-video'),
         audio: document.getElementById('bg-music'),
+        credits: [
+            document.getElementById('credit-1'),
+            document.getElementById('credit-2'),
+            document.getElementById('credit-3')
+        ],
         form: document.getElementById('rsvp-form'),
-        rsvpStep: document.getElementById('rsvp-step'),
+        rsvpStep: document.querySelector('.rsvp-director-cut'),
         vipStep: document.getElementById('vip-step'),
         btnConfirm: document.getElementById('btn-confirm'),
-        inputs: document.querySelectorAll('.chic-input-group input')
+        inputs: document.querySelectorAll('.cine-input-group input')
     };
 
     const CONFIG = {
-        whatsappNumber: "5511999999999", // INSERIR O NÚMERO
+        whatsappNumber: "5511999999999"
     };
 
-    let isAudioPlaying = false;
+    // A Mágica Cinematográfica: Controla o tempo de cada texto na tela
+    const playTitleSequence = () => {
+        let delay = 1000; // Tempo inicial após a tela ficar preta
 
-    // Transição suave de entrada
-    const unlockExperience = () => {
-        if (!isAudioPlaying) {
-            DOM.audio.volume = 0.3; // Volume baixo, música elegante
-            DOM.audio.play().catch(() => console.log("Áudio bloqueado"));
-            isAudioPlaying = true;
-        }
+        // Revela o Fundo Cinematográfico
+        DOM.bgContainer.style.opacity = '1';
+        DOM.video.play().catch(() => {});
+        
+        // Efeito Ken Burns no vídeo (Zoom lento contínuo)
+        setTimeout(() => { DOM.video.style.transform = 'scale(1)'; }, 100);
 
-        DOM.act1.classList.remove('is-active');
-        DOM.act1.classList.add('is-hidden');
+        // Sequência de Créditos
+        DOM.credits.forEach((credit, index) => {
+            // Entra o crédito
+            setTimeout(() => {
+                credit.classList.add('is-showing');
+            }, delay);
+
+            // Tempo que o crédito fica na tela (Título principal fica mais tempo)
+            let holdTime = (index === 1) ? 3500 : 2500; 
+            
+            // Sai o crédito
+            setTimeout(() => {
+                credit.classList.remove('is-showing');
+            }, delay + holdTime);
+
+            delay += holdTime + 1000; // Soma o tempo para o próximo crédito
+        });
+
+        // Após a sequência inteira terminar, entra o Ato 3 (O Convite)
+        setTimeout(() => {
+            DOM.act2.classList.remove('is-active');
+            DOM.act3.classList.add('is-active');
+        }, delay + 500);
+    };
+
+    const startTheFilm = () => {
+        // Áudio
+        DOM.audio.volume = 0.5;
+        DOM.audio.play().catch(() => console.log("Áudio bloqueado"));
+        
+        // Aplica o Letterbox de cinema
+        document.body.classList.add('film-started');
+
+        // Apaga o Teaser
+        DOM.act1.style.opacity = '0';
         
         setTimeout(() => {
+            DOM.act1.classList.remove('is-active');
             DOM.act2.classList.add('is-active');
-        }, 800);
+            
+            // Inicia a coreografia dos textos
+            playTitleSequence();
+        }, 1500);
     };
 
-    // Navegação entre Convite e RSVP
-    const showRSVP = () => {
-        DOM.act2.classList.remove('is-active');
-        setTimeout(() => {
-            DOM.act3.classList.add('is-active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 800);
-    };
-
-    const backToInvite = () => {
-        DOM.act3.classList.remove('is-active');
-        setTimeout(() => {
-            DOM.act2.classList.add('is-active');
-        }, 800);
-    };
-
-    // Validação Elegante
+    // Validação
     const validateForm = () => {
         let valid = true;
         DOM.inputs.forEach(input => {
@@ -65,7 +94,7 @@ const App = (function() {
         return valid;
     };
 
-    // Submissão do R.S.V.P.
+    // RSVP e WhatsApp
     const handleRSVP = (e) => {
         e.preventDefault();
         
@@ -74,11 +103,12 @@ const App = (function() {
         const name = document.getElementById('familyName').value;
         const guests = parseInt(document.getElementById('guests').value) + 1;
         
-        DOM.btnConfirm.innerText = "Processando...";
+        DOM.btnConfirm.innerText = "Emitindo Ingressos...";
         DOM.btnConfirm.disabled = true;
 
         setTimeout(() => {
-            // Fade suave para a área VIP
+            // Crossfade suave entre Formulário e PIX
+            DOM.rsvpStep.style.transition = 'opacity 1s ease';
             DOM.rsvpStep.style.opacity = '0';
             
             setTimeout(() => {
@@ -86,33 +116,28 @@ const App = (function() {
                 DOM.vipStep.style.display = 'block';
                 DOM.vipStep.style.opacity = '0';
                 
-                // Força reflow
-                void DOM.vipStep.offsetWidth;
+                void DOM.vipStep.offsetWidth; // Reflow
                 DOM.vipStep.style.transition = 'opacity 1s ease';
                 DOM.vipStep.style.opacity = '1';
 
-                // Dispara o WhatsApp
-                const msg = `🥂 *R.S.V.P. - Confirmação de Presença*\n\nÉ com grande satisfação que confirmamos nossa presença neste evento inesquecível.\n\n*Convidado:* ${name}\n*Total de Pessoas:* ${guests}`;
+                const msg = `🎟️ *Première - Confirmação*\n\nNossos lugares na plateia estão garantidos.\n\n*Protagonista:* ${name}\n*Total (Elenco):* ${guests}`;
                 window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
-            }, 500);
+            }, 1000);
             
-        }, 1200);
+        }, 1500);
     };
 
     const copyPix = () => {
         const pix = document.querySelector('.pix-key').value;
         navigator.clipboard.writeText(pix).then(() => {
-            // Modifica o texto do botão temporariamente para feedback sutil
-            const btn = document.querySelector('.btn-chic.outline');
-            const originalText = btn.innerText;
-            btn.innerText = "Copiado com sucesso";
-            setTimeout(() => btn.innerText = originalText, 3000);
+            const btn = document.querySelector('.btn-director.outline');
+            btn.innerText = "Bilheteria Copiada";
         });
     };
 
-    // Event Listeners
+    // Listeners
     DOM.form.addEventListener('submit', handleRSVP);
     DOM.inputs.forEach(inp => inp.addEventListener('input', () => inp.classList.remove('error')));
 
-    return { unlockExperience, showRSVP, backToInvite, copyPix };
+    return { startTheFilm, copyPix };
 })();
