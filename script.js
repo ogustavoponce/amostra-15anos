@@ -12,9 +12,12 @@ const App = (function() {
             document.getElementById('credit-2'),
             document.getElementById('credit-3')
         ],
+        sections: {
+            'main-menu': document.getElementById('main-menu'),
+            'rsvp-step': document.getElementById('rsvp-step'),
+            'vip-step': document.getElementById('vip-step')
+        },
         form: document.getElementById('rsvp-form'),
-        rsvpStep: document.querySelector('.rsvp-director-cut'),
-        vipStep: document.getElementById('vip-step'),
         btnConfirm: document.getElementById('btn-confirm'),
         inputs: document.querySelectorAll('.cine-input-group input')
     };
@@ -55,6 +58,19 @@ const App = (function() {
         }, 1500);
     };
 
+    // Navegação Interna (Alterna entre Menu, Form e Lista)
+    const switchSection = (sectionId) => {
+        // Remove a classe visível de todas
+        Object.values(DOM.sections).forEach(section => {
+            section.classList.remove('is-visible');
+        });
+        
+        // Adiciona a classe visível na seção alvo
+        setTimeout(() => {
+            DOM.sections[sectionId].classList.add('is-visible');
+        }, 300); // Pequeno delay para a animação do CSS acontecer
+    };
+
     const validateForm = () => {
         let valid = true;
         DOM.inputs.forEach(input => {
@@ -74,44 +90,37 @@ const App = (function() {
         
         if (!validateForm()) return;
 
-        // Pega o nome do adolescente
         const name = document.getElementById('guestName').value.trim();
+        const originalText = DOM.btnConfirm.innerText;
         
-        DOM.btnConfirm.innerText = "Confirmando...";
+        DOM.btnConfirm.innerText = "Redirecionando...";
         DOM.btnConfirm.disabled = true;
 
         setTimeout(() => {
-            DOM.rsvpStep.style.transition = 'opacity 1s ease';
-            DOM.rsvpStep.style.opacity = '0';
+            const msg = `✅ *CONFIRMAÇÃO DE PRESENÇA*\n\nNOME: ${name}\nEVENTO: 15 Anos`;
+            window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
             
-            setTimeout(() => {
-                DOM.rsvpStep.style.display = 'none';
-                DOM.vipStep.style.display = 'block';
-                DOM.vipStep.style.opacity = '0';
-                
-                void DOM.vipStep.offsetWidth; 
-                DOM.vipStep.style.transition = 'opacity 1s ease';
-                DOM.vipStep.style.opacity = '1';
-
-                // Formatação direta para controle na Planilha
-                const msg = `✅ *CONFIRMAÇÃO DE PRESENÇA*\n\nNOME: ${name}\nEVENTO: 15 Anos`;
-                
-                window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
-            }, 1000);
+            // Restaura o botão após enviar
+            DOM.btnConfirm.innerText = originalText;
+            DOM.btnConfirm.disabled = false;
             
-        }, 1500);
+            // Retorna ao menu automaticamente após enviar
+            switchSection('main-menu');
+        }, 1000);
     };
 
     const copyPix = () => {
         const pix = document.querySelector('.pix-key').value;
         navigator.clipboard.writeText(pix).then(() => {
             const btn = document.querySelector('.btn-director.outline');
+            const oldText = btn.innerText;
             btn.innerText = "PIX Copiado com Sucesso!";
+            setTimeout(() => { btn.innerText = oldText; }, 3000);
         });
     };
 
     DOM.form.addEventListener('submit', handleRSVP);
     DOM.inputs.forEach(inp => inp.addEventListener('input', () => inp.classList.remove('error')));
 
-    return { startTheFilm, copyPix };
+    return { startTheFilm, switchSection, copyPix };
 })();

@@ -67,38 +67,48 @@
                     </div>
                 </div>
 
-                <div class="rsvp-director-cut">
-                    <form id="rsvp-form" novalidate>
-                        <div class="cine-input-group">
-                            <input type="text" id="guestName" required placeholder=" ">
-                            <label>Seu Nome Completo</label>
+                <div id="dynamic-content-area" style="min-height: 200px; position: relative;">
+                    
+                    <div id="main-menu" class="interactive-section is-visible">
+                        <button class="btn-director" onclick="App.switchSection('rsvp-step')">Confirmar Minha Presença</button>
+                        <button class="btn-director outline" onclick="App.switchSection('vip-step')" style="margin-top: 15px;">Ver Sugestões de Presente</button>
+                    </div>
+
+                    <div id="rsvp-step" class="interactive-section">
+                        <h3 class="section-subtitle">Sua Presença</h3>
+                        <form id="rsvp-form" novalidate>
+                            <div class="cine-input-group">
+                                <input type="text" id="guestName" required placeholder=" ">
+                                <label>Seu Nome Completo</label>
+                            </div>
+                            <button type="submit" class="btn-director" id="btn-confirm">Enviar Confirmação</button>
+                            <button type="button" class="btn-text-only" onclick="App.switchSection('main-menu')">← Voltar ao Menu</button>
+                        </form>
+                    </div>
+
+                    <div id="vip-step" class="interactive-section">
+                        <div class="wishlist-container">
+                            <h3 class="wishlist-title">Minhas Sugestões</h3>
+                            <p class="wishlist-desc">Se quiser me dar uma lembrancinha, aqui estão algumas coisas que eu adoro:</p>
+                            
+                            <ul class="wishlist-items">
+                                <li><strong>Roupas:</strong> Tamanho [M] ou [38]</li>
+                                <li><strong>Calçados:</strong> Número [36]</li>
+                                <li><strong>Acessórios:</strong> Colares e Brincos (Dourado/Prata)</li>
+                                <li><strong>Outros:</strong> Maquiagens ou Vale-presente (Sephora)</li>
+                            </ul>
+                            
+                            <div class="gold-line" style="margin: 20px auto; width: 30px;"></div>
+                            
+                            <p class="wishlist-desc">Ou, se preferir a praticidade do PIX:</p>
+                            <input type="text" class="cine-input pix-key" value="aniversario.alice@banco.com" readonly style="text-align: center; border: 1px solid var(--gold-cinema); padding: 12px; width: 100%; background: rgba(0,0,0,0.5); color: var(--gold-cinema); letter-spacing: 2px; font-family: 'Cinzel', serif; margin-bottom: 15px;">
+                            <button class="btn-director outline" onclick="App.copyPix()">Copiar Chave PIX</button>
                         </div>
-                        <button type="submit" class="btn-director" id="btn-confirm">Confirmar Minha Presença</button>
-                    </form>
+                        <button type="button" class="btn-text-only" onclick="App.switchSection('main-menu')" style="display: block; margin: 15px auto 0;">← Voltar ao Menu</button>
+                    </div>
+
                 </div>
 
-                <div id="vip-step" style="display: none; margin-top: 20px;">
-                    <p class="invite-lore" style="color: var(--gold-cinema); font-size: 1.2rem; font-weight: 500;">Presença Confirmada! ✔️</p>
-                    <p class="invite-lore" style="font-size: 0.9rem; margin-bottom: 20px;">Mal posso esperar para celebrar com você!</p>
-                    
-                    <div class="wishlist-container">
-                        <h3 class="wishlist-title">Minhas Sugestões de Presente</h3>
-                        <p class="wishlist-desc">Se quiser me dar uma lembrancinha, aqui estão algumas coisas que eu adoro:</p>
-                        
-                        <ul class="wishlist-items">
-                            <li>Vale-presente (Sephora, Zara, MAC)</li>
-                            <li>Roupas tamanho [M] ou calçado [36]</li>
-                            <li>Maquiagens, Skincare ou Perfumes</li>
-                            <li>Livros de fantasia ou romance</li>
-                        </ul>
-                        
-                        <div class="gold-line" style="margin: 20px auto; width: 30px;"></div>
-                        
-                        <p class="wishlist-desc">Ou, se preferir a praticidade do PIX:</p>
-                        <input type="text" class="cine-input pix-key" value="aniversario.alice@banco.com" readonly style="text-align: center; border: 1px solid var(--gold-cinema); padding: 12px; width: 100%; background: rgba(0,0,0,0.5); color: var(--gold-cinema); letter-spacing: 2px; font-family: 'Cinzel', serif; margin-bottom: 15px;">
-                        <button class="btn-director outline" onclick="App.copyPix()">Copiar Chave PIX</button>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

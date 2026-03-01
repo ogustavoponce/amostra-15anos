@@ -150,3 +150,69 @@ body.film-started .cinema-bar { height: 5vh; }
 .btn-director:hover { background-color: #fff; box-shadow: 0 0 20px rgba(197, 160, 89, 0.4); }
 .btn-director.outline { background-color: transparent; border: 1px solid var(--gold-cinema); color: var(--gold-cinema); }
 .btn-director.outline:hover { background-color: var(--gold-cinema); color: #000; }
+
+/* ==========================================================================
+   NAVEGAÇÃO INTERNA (Ato 3)
+   ========================================================================== */
+.interactive-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+}
+
+.interactive-section.is-visible {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.section-subtitle {
+    font-family: var(--font-cine);
+    color: var(--gold-cinema);
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.btn-text-only {
+    background: none;
+    border: none;
+    color: var(--text-dark);
+    font-family: var(--font-script);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 25px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.btn-text-only:hover {
+    color: var(--gold-cinema);
+}
+
+/* ==========================================================================
+   WISHLIST (Lista de Presentes)
+   ========================================================================== */
+.wishlist-container {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(197, 160, 89, 0.1);
+    padding: 25px 20px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.wishlist-title { font-family: var(--font-cine); color: var(--gold-cinema); font-size: 1.2rem; margin-bottom: 10px; text-align: center; letter-spacing: 1px; }
+.wishlist-desc { font-size: 0.85rem; color: var(--text-silver); margin-bottom: 15px; text-align: center; font-weight: 300; }
+
+.wishlist-items { list-style: none; padding: 0; margin: 0 0 20px 0; }
+.wishlist-items li { font-size: 0.9rem; color: var(--text-silver); padding: 8px 0; border-bottom: 1px dashed rgba(255, 255, 255, 0.1); font-weight: 300; position: relative; padding-left: 20px; }
+.wishlist-items li strong { color: var(--gold-dim); font-weight: 400; }
+.wishlist-items li::before { content: '✦'; position: absolute; left: 0; color: var(--gold-dim); font-size: 0.8rem; }
+.wishlist-items li:last-child { border-bottom: none; }
