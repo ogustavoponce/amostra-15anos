@@ -6,10 +6,9 @@
     <title>XV | Através do Espelho</title>
     
     <link rel="stylesheet" href="style.css">
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -25,13 +24,14 @@
             <source src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-water-in-slow-motion-11884-large.mp4" type="video/mp4">
         </video>
         <div class="cinematic-vignette"></div>
-        <div class="film-grain"></div> </div>
+        <div class="film-grain"></div>
+    </div>
 
     <section id="act-1" class="scene is-active">
         <div class="portal-container" onclick="App.startTheFilm()">
             <div class="glowing-ring"></div>
-            <p class="director-text">Uma Produção Inesquecível</p>
-            <h1 class="portal-action">Atravessar o Espelho</h1>
+            <p class="director-text">Um Convite Especial</p>
+            <h1 class="portal-action">Entrar no País das Maravilhas</h1>
         </div>
     </section>
 
@@ -39,59 +39,65 @@
         <div class="title-sequence">
             <h2 class="film-credit" id="credit-1">O Tempo é Apenas Uma Ilusão.</h2>
             <h1 class="film-title" id="credit-2">[NOME DA ANFITRIÃ]</h1>
-            <h3 class="film-subtitle" id="credit-3">Apresenta<br>Uma Noite no País das Maravilhas</h3>
+            <h3 class="film-subtitle" id="credit-3">Meus 15 Anos<br>Uma Noite Inesquecível</h3>
         </div>
     </section>
 
     <section id="act-3" class="scene">
         <div class="cinematic-panel">
             <div class="panel-content">
-                <p class="date-stamp">XV • XI • MMXVI</p>
+                <p class="date-stamp">15 • NOV • 2026</p>
                 
-                <h2 class="main-invite-title">O Grande Baile</h2>
+                <h2 class="main-invite-title">A Grande Noite</h2>
                 <div class="gold-line"></div>
                 
                 <p class="invite-lore">
-                    Você foi escalado(a) para o papel principal desta noite.<br>
-                    Não se atrase. O relógio já começou a correr.
+                    Você é uma parte essencial desta história.<br>
+                    Prepare-se para uma noite surreal e cheia de magia.
                 </p>
                 
                 <div class="cast-details">
                     <div class="cast-row">
-                        <span class="cast-role">Cena 1 (Recepção)</span>
-                        <span class="cast-actor">20:00, Sábado, 15 de Novembro</span>
+                        <span class="cast-role">Horário & Local</span>
+                        <span class="cast-actor">20:00 • Château des Événements</span>
                     </div>
                     <div class="cast-row">
-                        <span class="cast-role">Locação (Set)</span>
-                        <span class="cast-actor">Château des Événements, Cidade</span>
-                    </div>
-                    <div class="cast-row">
-                        <span class="cast-role">Figurino</span>
-                        <span class="cast-actor">Gala / Black Tie</span>
+                        <span class="cast-role">Dress Code</span>
+                        <span class="cast-actor">Esporte Fino / Gala</span>
                     </div>
                 </div>
 
                 <div class="rsvp-director-cut">
                     <form id="rsvp-form" novalidate>
                         <div class="cine-input-group">
-                            <input type="text" id="familyName" required placeholder=" ">
-                            <label>Nome do Convidado (Protagonista)</label>
+                            <input type="text" id="guestName" required placeholder=" ">
+                            <label>Seu Nome Completo</label>
                         </div>
-                        <div class="cine-input-group">
-                            <input type="number" id="guests" min="0" max="5" required placeholder=" ">
-                            <label>Acompanhantes (Elenco de Apoio)</label>
-                        </div>
-                        <button type="submit" class="btn-director" id="btn-confirm">Garantir Lugar na Estreia</button>
+                        <button type="submit" class="btn-director" id="btn-confirm">Confirmar Minha Presença</button>
                     </form>
                 </div>
 
-                <div id="vip-step" style="display: none; margin-top: 30px;">
-                    <p class="invite-lore" style="color: var(--gold-cinema); font-size: 1.1rem;">Lista VIP Confirmada.</p>
-                    <p class="invite-lore" style="font-size: 0.9rem; margin-bottom: 20px;">
-                        Como bons cineastas, dispensamos presentes físicos no set de gravação.<br> Nossa bilheteria (Chave PIX) encontra-se abaixo.
-                    </p>
-                    <input type="text" class="cine-input pix-key" value="premiere.alice@banco.com" readonly style="text-align: center; border: 1px solid var(--gold-cinema); padding: 15px; width: 100%; background: rgba(0,0,0,0.5); color: var(--gold-cinema); letter-spacing: 2px; font-family: 'Cinzel', serif;">
-                    <button class="btn-director outline" onclick="App.copyPix()" style="margin-top: 15px;">Copiar Bilheteria</button>
+                <div id="vip-step" style="display: none; margin-top: 20px;">
+                    <p class="invite-lore" style="color: var(--gold-cinema); font-size: 1.2rem; font-weight: 500;">Presença Confirmada! ✔️</p>
+                    <p class="invite-lore" style="font-size: 0.9rem; margin-bottom: 20px;">Mal posso esperar para celebrar com você!</p>
+                    
+                    <div class="wishlist-container">
+                        <h3 class="wishlist-title">Minhas Sugestões de Presente</h3>
+                        <p class="wishlist-desc">Se quiser me dar uma lembrancinha, aqui estão algumas coisas que eu adoro:</p>
+                        
+                        <ul class="wishlist-items">
+                            <li>Vale-presente (Sephora, Zara, MAC)</li>
+                            <li>Roupas tamanho [M] ou calçado [36]</li>
+                            <li>Maquiagens, Skincare ou Perfumes</li>
+                            <li>Livros de fantasia ou romance</li>
+                        </ul>
+                        
+                        <div class="gold-line" style="margin: 20px auto; width: 30px;"></div>
+                        
+                        <p class="wishlist-desc">Ou, se preferir a praticidade do PIX:</p>
+                        <input type="text" class="cine-input pix-key" value="aniversario.alice@banco.com" readonly style="text-align: center; border: 1px solid var(--gold-cinema); padding: 12px; width: 100%; background: rgba(0,0,0,0.5); color: var(--gold-cinema); letter-spacing: 2px; font-family: 'Cinzel', serif; margin-bottom: 15px;">
+                        <button class="btn-director outline" onclick="App.copyPix()">Copiar Chave PIX</button>
+                    </div>
                 </div>
             </div>
         </div>
