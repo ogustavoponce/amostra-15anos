@@ -216,3 +216,82 @@ body.film-started .cinema-bar { height: 5vh; }
 .wishlist-items li strong { color: var(--gold-dim); font-weight: 400; }
 .wishlist-items li::before { content: '✦'; position: absolute; left: 0; color: var(--gold-dim); font-size: 0.8rem; }
 .wishlist-items li:last-child { border-bottom: none; }
+
+/* ==========================================================================
+   CONTAGEM REGRESSIVA (Countdown)
+   ========================================================================== */
+.cine-countdown {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.cd-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(197, 160, 89, 0.1);
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    padding: 10px 15px;
+    border-radius: 4px;
+    min-width: 60px;
+}
+
+.cd-box span {
+    font-family: var(--font-cine);
+    font-size: 1.5rem;
+    color: var(--gold-cinema);
+    line-height: 1;
+}
+
+.cd-box small {
+    font-family: var(--font-script);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dark);
+    margin-top: 5px;
+}
+
+/* ==========================================================================
+   ASSINATURA E GPS
+   ========================================================================== */
+.signature {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.2rem;
+    color: var(--gold-cinema);
+    text-align: right;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    opacity: 0.9;
+}
+
+.location-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-location {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-silver);
+    font-family: var(--font-script);
+    font-size: 0.7rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-location:hover {
+    background: rgba(197, 160, 89, 0.2);
+    border-color: var(--gold-cinema);
+    color: var(--gold-cinema);
+}

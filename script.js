@@ -23,7 +23,32 @@ const App = (function() {
     };
 
     const CONFIG = {
-        whatsappNumber: "5511999999999" // NÚMERO QUE VAI RECEBER AS MENSAGENS
+        whatsappNumber: "5511999999999", // SEU NÚMERO
+        targetDate: new Date("Apr 25, 2026 20:00:00").getTime() // A Data da Festa da Mônica
+    };
+
+    // --- LÓGICA DO CRONÔMETRO ---
+    const startCountdown = () => {
+        const timer = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = CONFIG.targetDate - now;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "<div class='cd-box' style='width:100%'><span style='font-size: 1rem; letter-spacing: 4px;'>A Magia Começou!</span></div>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("cd-days").innerText = days.toString().padStart(2, '0');
+            document.getElementById("cd-hours").innerText = hours.toString().padStart(2, '0');
+            document.getElementById("cd-minutes").innerText = minutes.toString().padStart(2, '0');
+            document.getElementById("cd-seconds").innerText = seconds.toString().padStart(2, '0');
+        }, 1000);
     };
 
     const playTitleSequence = () => {
@@ -42,6 +67,7 @@ const App = (function() {
         setTimeout(() => {
             DOM.act2.classList.remove('is-active');
             DOM.act3.classList.add('is-active');
+            startCountdown(); // Inicia o relógio assim que o convite aparece
         }, delay + 500);
     };
 
@@ -58,17 +84,14 @@ const App = (function() {
         }, 1500);
     };
 
-    // Navegação Interna (Alterna entre Menu, Form e Lista)
     const switchSection = (sectionId) => {
-        // Remove a classe visível de todas
         Object.values(DOM.sections).forEach(section => {
             section.classList.remove('is-visible');
         });
         
-        // Adiciona a classe visível na seção alvo
         setTimeout(() => {
             DOM.sections[sectionId].classList.add('is-visible');
-        }, 300); // Pequeno delay para a animação do CSS acontecer
+        }, 300);
     };
 
     const validateForm = () => {
@@ -93,18 +116,15 @@ const App = (function() {
         const name = document.getElementById('guestName').value.trim();
         const originalText = DOM.btnConfirm.innerText;
         
-        DOM.btnConfirm.innerText = "Redirecionando...";
+        DOM.btnConfirm.innerText = "Confirmando...";
         DOM.btnConfirm.disabled = true;
 
         setTimeout(() => {
-            const msg = `✅ *CONFIRMAÇÃO DE PRESENÇA*\n\nNOME: ${name}\nEVENTO: 15 Anos`;
+            const msg = `✅ *CONFIRMAÇÃO DE PRESENÇA*\n\nNOME: ${name}\nEVENTO: 15 Anos - Mônica`;
             window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
             
-            // Restaura o botão após enviar
             DOM.btnConfirm.innerText = originalText;
             DOM.btnConfirm.disabled = false;
-            
-            // Retorna ao menu automaticamente após enviar
             switchSection('main-menu');
         }, 1000);
     };

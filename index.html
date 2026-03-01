@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XV | Através do Espelho</title>
+    <title>XV | Mônica Através do Espelho</title>
     
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Great+Vibes&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -30,7 +30,7 @@
     <section id="act-1" class="scene is-active">
         <div class="portal-container" onclick="App.startTheFilm()">
             <div class="glowing-ring"></div>
-            <p class="director-text">Um Convite Especial</p>
+            <p class="director-text">Acesso Exclusivo</p>
             <h1 class="portal-action">Entrar no País das Maravilhas</h1>
         </div>
     </section>
@@ -38,7 +38,7 @@
     <section id="act-2" class="scene">
         <div class="title-sequence">
             <h2 class="film-credit" id="credit-1">O Tempo é Apenas Uma Ilusão.</h2>
-            <h1 class="film-title" id="credit-2">[NOME DA ANFITRIÃ]</h1>
+            <h1 class="film-title" id="credit-2">MÔNICA</h1>
             <h3 class="film-subtitle" id="credit-3">Meus 15 Anos<br>Uma Noite Inesquecível</h3>
         </div>
     </section>
@@ -46,20 +46,33 @@
     <section id="act-3" class="scene">
         <div class="cinematic-panel">
             <div class="panel-content">
-                <p class="date-stamp">15 • NOV • 2026</p>
+                <p class="date-stamp">25 • ABRIL • 2026</p>
                 
                 <h2 class="main-invite-title">A Grande Noite</h2>
+                
+                <div id="countdown" class="cine-countdown">
+                    <div class="cd-box"><span id="cd-days">00</span><small>Dias</small></div>
+                    <div class="cd-box"><span id="cd-hours">00</span><small>Horas</small></div>
+                    <div class="cd-box"><span id="cd-minutes">00</span><small>Min</small></div>
+                    <div class="cd-box"><span id="cd-seconds">00</span><small>Seg</small></div>
+                </div>
+
                 <div class="gold-line"></div>
                 
                 <p class="invite-lore">
                     Você é uma parte essencial desta história.<br>
                     Prepare-se para uma noite surreal e cheia de magia.
                 </p>
+                <p class="signature">Com carinho, Mônica</p>
                 
                 <div class="cast-details">
                     <div class="cast-row">
                         <span class="cast-role">Horário & Local</span>
                         <span class="cast-actor">20:00 • Château des Événements</span>
+                        <div class="location-actions">
+                            <a href="https://maps.google.com/?q=Castelo+de+Eventos" target="_blank" class="btn-location">📍 Google Maps</a>
+                            <a href="https://waze.com/ul?q=Castelo+de+Eventos" target="_blank" class="btn-location">🚗 Waze</a>
+                        </div>
                     </div>
                     <div class="cast-row">
                         <span class="cast-role">Dress Code</span>
@@ -101,14 +114,13 @@
                             <div class="gold-line" style="margin: 20px auto; width: 30px;"></div>
                             
                             <p class="wishlist-desc">Ou, se preferir a praticidade do PIX:</p>
-                            <input type="text" class="cine-input pix-key" value="aniversario.alice@banco.com" readonly style="text-align: center; border: 1px solid var(--gold-cinema); padding: 12px; width: 100%; background: rgba(0,0,0,0.5); color: var(--gold-cinema); letter-spacing: 2px; font-family: 'Cinzel', serif; margin-bottom: 15px;">
+                            <input type="text" class="cine-input pix-key" value="monica.alice@banco.com" readonly style="text-align: center; border: 1px solid var(--gold-cinema); padding: 12px; width: 100%; background: rgba(0,0,0,0.5); color: var(--gold-cinema); letter-spacing: 2px; font-family: 'Cinzel', serif; margin-bottom: 15px;">
                             <button class="btn-director outline" onclick="App.copyPix()">Copiar Chave PIX</button>
                         </div>
                         <button type="button" class="btn-text-only" onclick="App.switchSection('main-menu')" style="display: block; margin: 15px auto 0;">← Voltar ao Menu</button>
                     </div>
 
                 </div>
-
             </div>
         </div>
     </section>
